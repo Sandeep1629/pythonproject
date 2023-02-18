@@ -1,1 +1,1 @@
-web: gunicorn loginflask:app
+web: gunicorn app:loginflask
