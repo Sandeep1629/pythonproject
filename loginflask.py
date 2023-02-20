@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('login.html')
+    return render_template('sandy.html')
 @app.route('/l',methods=['POST'])
 def hl():
     ename = request.form.get("username")
@@ -15,7 +15,7 @@ def hl():
     client = pymongo.MongoClient(
         'mongodb+srv://2100032245:2100032245@cluster0.iejagan.mongodb.net/?retryWrites=true&w=majority')
 
-    db = client["sdp"]
+    db = client["Pfsd"]
     collection = db["sdp4"]
     user = {"username": ename, "password": epass}
     result = collection.find_one(user)
@@ -30,15 +30,16 @@ def register():
 @app.route('/lr',methods=['POST','GET'])
 def hlr():
     ename = request.form.get("username")
+    email = request.form.get("email")
     epass = request.form.get("password")
-    cpass = request.form.get("cpassword")
+
     # Connect to MongoDB
     client = pymongo.MongoClient(
         'mongodb+srv://2100032245:2100032245@cluster0.iejagan.mongodb.net/?retryWrites=true&w=majority')
 
-    db = client["sdp"]
+    db = client["Pfsd"]
     collection = db["sdp4"]
-    user = {"username": ename, "password": epass, "confirm-password": cpass}
+    user = {"username": ename,"email": email, "password": epass}
     result = collection.insert_one(user)
     if result != None:
         return "<h1><center>HOLA!! U CREATED U ACCOUNT PLEASE LOGIN</center></h1>"
